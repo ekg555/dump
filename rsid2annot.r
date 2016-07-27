@@ -11,8 +11,8 @@ remDr$open()
 remDr$close()
 
 # setwd("C:/Users/Eugene/Desktop/") # for laptop
-setwd('C:/Users/Eugene/Desktop/Catherine/') # for home-desktop
-# setwd("C:/Users/!eugene_konagaya/Desktop")
+# setwd('C:/Users/Eugene/Desktop/Catherine/') # for home-desktop
+setwd("C:/Users/!eugene_konagaya/Desktop")
 
 #  "rsid2annot()" function
 # ==============================
