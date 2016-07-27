@@ -11,8 +11,8 @@ remDr$open()
 remDr$close()
 
 # setwd("C:/Users/Eugene/Desktop/") # for laptop
-# setwd('C:/Users/Eugene/Desktop/Catherine/') # for home-desktop
-setwd("C:/Users/!eugene_konagaya/Desktop")
+setwd('C:/Users/Eugene/Desktop/Catherine/') # for home-desktop
+# setwd("C:/Users/!eugene_konagaya/Desktop")
 
 #  "rsid2annot()" function
 # ==============================
@@ -131,6 +131,6 @@ rsid2annot <- function(rsids=NULL, file=NULL) {
   Get.Results2 <- remDr$findElement(using = 'xpath', "//div[11]/div/button[2]")
   Get.Results2$clickElement() 
   
-  sprintf( "Annotation Query for %s Started: %s", filename, Sys.time())
+  sprintf( "Annotation Query for %s Started: %s", file, Sys.time())
   
 }

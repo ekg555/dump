@@ -3,8 +3,8 @@ rm(list=ls())
 Logfile <- paste0("Annotat.r.LOG_", Sys.Date(), ".txt")
 
 # Annot.dir <- 'R:/StaffFolders/KonagayaEugene/Annotations/RMS' # error UCSC site down?
-Annot.dir <- 'R:/StaffFolders/KonagayaEugene/Annotations'
-# Annot.dir <- 'C:/Users/Eugene/Desktop/Catherine/Annotations'
+# Annot.dir <- 'R:/StaffFolders/KonagayaEugene/Annotations'
+Annot.dir <- 'C:/Users/Eugene/Desktop/Catherine/Annotations'
 
 setwd(Annot.dir)
 
@@ -84,13 +84,13 @@ coord2snp <- function (parent.dir = Annot.dir) {
         snp <- as.vector(orig$V1, mode="character")
         names(orig) = c('SNP')
         
-      # snp-coord list (w/ HEADER, multi-column, "SNP"/"snp" in header req'd!)  
+        # snp-coord list (w/ HEADER, multi-column, "SNP"/"snp" in header req'd!)  
       } else if ("SNP" %in% orig[1,] || "snp" %in% orig[1,]) {
         
         orig <- read.table(files[j], header=TRUE)
         snp <- as.vector(orig$SNP)
         
-      # NO "SNP"/"snp" in header!  
+        # NO "SNP"/"snp" in header!  
       } else {
         snp <- "No SNPs"                              
         print(paste("NO SNP-HEADER IN: ", files[j]))
@@ -130,7 +130,7 @@ coord2snp <- function (parent.dir = Annot.dir) {
         }
         snp2.spl[[n+1]] <- snp2[(1000*n+1):(1000*n+rem.n),]
         
-      # IF <= 1000 SNPs, convert to list-object
+        # IF <= 1000 SNPs, convert to list-object
       } else {
         snp2.spl <- list(snp2)
         names(snp2.spl) <- '1'
@@ -277,7 +277,7 @@ for (i in 1:length(folders)) {
   setwd( file.path(Annot.dir, folders[i]) )
   files <- list.files()                 # list of files & directories
   files <- files[grep(".*.txt", files)] # subset list to .txt files
-
+  
   for (j in 1:length(files)) {
     
     print( paste("...", folders[i], files[j], sep="/") )
@@ -301,4 +301,3 @@ sink()
 # OrgDb (for GO, KEGG, gene linking)
 # TxDb 
 # Uniprot
-
