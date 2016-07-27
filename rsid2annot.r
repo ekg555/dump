@@ -27,6 +27,7 @@ rsid2annot <- function(rsids=NULL, file=NULL) {
   checkForServer()
   startServer()
   remDr$open()
+  Sys.sleep(1)
   remDr$navigate("https://genome.ucsc.edu/cgi-bin/hgVai")
   
   # TEST: rsids <- read.table('hgTables.txt') 
