@@ -3,8 +3,8 @@ rm(list=ls())
 Logfile <- paste0("Annotat.r.LOG_", Sys.Date(), ".txt")
 
 # Annot.dir <- 'R:/StaffFolders/KonagayaEugene/Annotations/RMS' # error UCSC site down?
-# Annot.dir <- 'R:/StaffFolders/KonagayaEugene/Annotations'
-Annot.dir <- 'C:/Users/Eugene/Desktop/Catherine/Annotations'
+Annot.dir <- 'R:/StaffFolders/KonagayaEugene/Annotations'
+# Annot.dir <- 'C:/Users/Eugene/Desktop/Catherine/Annotations'
 
 setwd(Annot.dir)
 
@@ -239,8 +239,10 @@ coord2snp <- function (parent.dir = Annot.dir) {
       }
       # RSID >> Annotation (in batches of 1K)
       
+      N <- length(names(toCSV.spl))
+      
       for (setnum in names(toCSV.spl)) {
-        rsid2annot(toCSV.spl[[setnum]][['name']], filename)
+        rsid2annot(toCSV.spl[[setnum]][['name']], paste0(filename," (",setnum,"of",N,")") )
       }
       
       save(list=ls(), file=paste0(filename,".Rdata"))
