@@ -8,7 +8,7 @@ Logfile <- paste0("coord2rsid.r.LOG_", Sys.Date(), ".txt")
 # Annot.dir <- 'C:/Users/Eugene/Desktop/Catherine/Annotations'# for home-desktop
 # ===========================================================================================
 
-Annot.dir <- ~/Annotation # for genepi server
+Annot.dir <- '~/Annotation' # for genepi server
 
 setwd(Annot.dir)
 
@@ -36,7 +36,7 @@ sink(Logfile)
 require(rtracklayer)
 require(stringr)
 require(TxDb.Hsapiens.UCSC.hg19.knownGene)
-require(VariantAnnotation)
+# require(VariantAnnotation)
 
 hg19 <- TxDb.Hsapiens.UCSC.hg19.knownGene::TxDb.Hsapiens.UCSC.hg19.knownGene
 
