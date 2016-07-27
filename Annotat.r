@@ -240,7 +240,7 @@ coord2snp <- function (parent.dir = Annot.dir) {
       # RSID >> Annotation (in batches of 1K)
       
       for (setnum in names(toCSV.spl)) {
-        rsid2annot(toCSV.spl[[setnum]][['name']])
+        rsid2annot(toCSV.spl[[setnum]][['name']], filename)
       }
       
       save(list=ls(), file=paste0(filename,".Rdata"))
