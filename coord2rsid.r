@@ -8,7 +8,19 @@ Logfile <- paste0("coord2rsid.r.LOG_", Sys.Date(), ".txt")
 # Annot.dir <- 'C:/Users/Eugene/Desktop/Catherine/Annotations'# for home-desktop
 # ===========================================================================================
 
-Annot.dir <- '~/Annotation' # for genepi server
+# Annot.dir = '~/Annotation'
+args <- print(as.character(commandArgs(trailingOnly=TRUE)[1]))
+Annot.dir <- args
+
+print(Annot.dir)
+# print(args)
+
+if (!exists('Annot.dir')) {
+
+print('Annot.dir DNE')# NO Annot.dir!!!
+q()
+
+}
 
 setwd(Annot.dir)
 
@@ -180,8 +192,11 @@ coord2rsid <- function (parent.dir = Annot.dir) {
           
           assign( paste0("q.rsid.",setnum),
                   ucscTableQuery(mySession,                                 # session = mySession
-                                 track="snp146",                            # track = "snp146"
+                                 track="All SNPs(146)" ,                    # track = "All SNPs(146)"
                                  get(paste0("targetRanges.",setnum)) ) )    # range = "targetRanges.n"
+          
+          get(paste0('tableName(q.rsid.',setnum,')')) <- "snp146"          # tableName = 'snp146'
+          
         }
         # tableNames(q.rsid)
         
