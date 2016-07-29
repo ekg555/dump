@@ -192,11 +192,8 @@ coord2rsid <- function (parent.dir = Annot.dir) {
           
           assign( paste0("q.rsid.",setnum),
                   ucscTableQuery(mySession,                                 # session = mySession
-                                 track="All SNPs(146)" ,                    # track = "All SNPs(146)"
+                                 track="snp146",                            # track = "snp146"
                                  get(paste0("targetRanges.",setnum)) ) )    # range = "targetRanges.n"
-          
-          get(paste0('tableName(q.rsid.',setnum,')')) <- "snp146"          # tableName = 'snp146'
-          
         }
         # tableNames(q.rsid)
         
