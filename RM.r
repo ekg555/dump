@@ -165,30 +165,20 @@ readem <- function (state=c(), yr=c(), boot=TRUE) {
 #  Readem Runs
 # ==========================================================
 
+setwd("/work/project/final")
+st <- c(dir())
+yrs <- c(as.character(2006:2015))
 
 #  By STATE (53 incl. "National")
 # ================================
-
 setwd("/work/project/final")
-
-st <- c(dir())
-
-
 try( readem(state=st, boot=TRUE) )
-t_st_f <- date()
 
 
 #   By STATE*YR (53 incl. "National" * 2006~2015)
 # ================================
-
 setwd("/work/project/final")
-
-st <- c(dir())
-yrs <- c(as.character(2006:2015))
-
-t_styr_0 <- date()
 try( readem(state=st, yr=yrs, boot=TRUE) )
-t_styr_f <- date()
 
 
 #  SAVE AND LOG GLOBAL START/END TIMES
