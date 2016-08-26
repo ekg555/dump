@@ -105,8 +105,7 @@ readem <- function (state=c(), yr=c(), boot=TRUE) {
       }
       
     # if only states specified  
-    } else {
-      st.inv <- rbind(ctrl)   
+    } else {   
       yr  <- list.files()
       
       for (j in 1:length(yr)) {
