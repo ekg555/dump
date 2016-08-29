@@ -169,7 +169,7 @@ readem <- function (state=c(), yr=c(), boot=TRUE) {
 # ==============================
 
 
-# SMALL: PR (n=4,664)
+# SMALL: AL (n=4,664)
 
 st <- c('AL')
 try( readem(st, boot=TRUE) )
