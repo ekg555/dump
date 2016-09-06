@@ -42,7 +42,7 @@ sink(Logfile)
 # # biocLite('ensemblVEP')
 # # biocLite('AnnotationHub')
 # # library(AnnotationHub)
-# library(ensemblVEP)
+# # library(ensemblVEP)
 
 # source('rsid2annot.r')
 require(rtracklayer)
@@ -93,6 +93,11 @@ coord2rsid <- function (parent.dir = Annot.dir) {
     files <- rownames(info[info$size>0,])
     
     files <- files[!gsub(".txt", "", files) %in% gsub(".Rdata", "", rdata.files)]
+    
+    for (emp in 1:length(empty)) {
+      print( paste("EMPTY FILE: ", empty[emp]) )    }
+  
+  
     if (!length(files) > 0) {
       sprintf("NO NEW .TXT files in '%s'", folders[i])
     } else {
