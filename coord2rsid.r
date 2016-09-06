@@ -16,10 +16,10 @@ print(Annot.dir)
 # print(args)
 
 if (!exists('Annot.dir')) {
-
-print('Annot.dir DNE')# NO Annot.dir!!!
-q()
-
+  
+  print('Annot.dir DNE')# NO Annot.dir!!!
+  q()
+  
 }
 
 setwd(Annot.dir)
@@ -86,6 +86,11 @@ coord2rsid <- function (parent.dir = Annot.dir) {
     setwd( file.path(parent.dir, folders[i]) )
     files <- list.files()                 # list of files & directories
     files <- files[grep(".*.txt", files)] # subset list to .txt files
+    
+    # EMPTY FILE CHECK!!! ADDED 2016.09.26
+    info <- file.info(files)
+    empty <- rownames(info[info$size==0,])
+    files <- rownames(info[info$size>0,])
     
     files <- files[!gsub(".txt", "", files) %in% gsub(".Rdata", "", rdata.files)]
     if (!length(files) > 0) {
@@ -192,8 +197,11 @@ coord2rsid <- function (parent.dir = Annot.dir) {
           
           assign( paste0("q.rsid.",setnum),
                   ucscTableQuery(mySession,                                 # session = mySession
-                                 track="snp146",                            # track = "snp146"
+                                 track="All SNPs(146)" ,                    # track = "All SNPs(146)"
                                  get(paste0("targetRanges.",setnum)) ) )    # range = "targetRanges.n"
+          
+          assign(eval(paste0('tableName(q.rsid.',setnum,')')), "snp146")    # tableName = 'snp146'
+          
         }
         # tableNames(q.rsid)
         
