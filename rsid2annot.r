@@ -11,8 +11,8 @@ remDr$open()
 remDr$close()
 
 # setwd("C:/Users/Eugene/Desktop/") # for laptop
-# setwd('C:/Users/Eugene/Desktop/Catherine/') # for home-desktop
-setwd("C:/Users/!eugene_konagaya/Desktop")
+setwd('C:/Users/Eugene/Documents/Dropbox/Apps/n0/RMS-IGFoutput/2016-09-12/rsid.csv') # for home-desktop
+# setwd("C:/Users/!eugene_konagaya/Desktop")
 
 #  "rsid2annot()" function
 # ==============================
@@ -27,8 +27,9 @@ rsid2annot <- function(rsids=NULL, file=NULL) {
   checkForServer()
   startServer()
   remDr$open()
-  Sys.sleep(1)
   remDr$navigate("https://genome.ucsc.edu/cgi-bin/hgVai")
+  
+  Sys.sleep(.5)
   
   # TEST: rsids <- read.table('hgTables.txt') 
   rsid <- as.vector(rsids, mode='character')
@@ -75,7 +76,7 @@ rsid2annot <- function(rsids=NULL, file=NULL) {
   #  SELECT MAX VARIANTS = 1000
   # ===================================
   #/html/body/table/tbody/tr/td/div[1]/table/tbody/tr/td/table/tbody/tr/td/table/tbody/tr[2]/td[2]/form[4]/select[2]
-  maxVar.select <- remDr$findElement(using = 'xpath', "//form[4]/select[2]/option[3]")
+  maxVar.select <- remDr$findElement(using = 'xpath', "//form[4]/select[2]/option[4]")
   maxVar.select$clickElement()
   # Sys.sleep(.05)
 
@@ -90,14 +91,6 @@ rsid2annot <- function(rsids=NULL, file=NULL) {
   #  ENTER RSIDs & FILENAME
   # ===============================
 
-  #xpath for textbox (for rsid)
-  #/html/body/table/tbody/tr/td/div[1]/table/tbody/tr/td/table/tbody/tr/td/table/tbody/tr[2]/td[2]/form[4]/div[3]/textarea
-  rsid.txtbox <- remDr$findElement(using = 'xpath', "//form[4]/div[3]/textarea")
-  rsid.txtbox$sendKeysToElement( list(as.character(paste(rsid, collapse ="\n"))) )
-  
-  # humanized wait
-  # Sys.sleep(mean(sample(3:5,10, replace=TRUE)))
-  
   # name saved file
   outTXT.txtbox <- remDr$findElement(using = 'xpath', "//form[4]/input[4]")
   outTXT.txtbox$clickElement()
@@ -107,6 +100,13 @@ rsid2annot <- function(rsids=NULL, file=NULL) {
   # humanized wait
   # Sys.sleep(mean(sample(5:7,10, replace=TRUE)))
   
+  #xpath for textbox (for rsid)
+  #/html/body/table/tbody/tr/td/div[1]/table/tbody/tr/td/table/tbody/tr/td/table/tbody/tr[2]/td[2]/form[4]/div[3]/textarea
+  rsid.txtbox <- remDr$findElement(using = 'xpath', "//form[4]/div[3]/textarea")
+  rsid.txtbox$sendKeysToElement( list(key= "control","v") )
+  # as.character(paste(rsid, collapse ="\n")
+  # humanized wait
+  # Sys.sleep(mean(sample(3:5,10, replace=TRUE)))
   
   #//form[4]/input[6]
   Get.gzip <- remDr$findElement(using = 'xpath', "//form[4]/input[6]")
@@ -134,4 +134,16 @@ rsid2annot <- function(rsids=NULL, file=NULL) {
   
   sprintf( "Annotation Query for %s Started: %s", file, Sys.time())
   
+}
+
+# run rsid2annot
+                                                                         
+files <- list.files()
+filenames <- gsub(".csv$", "", files)
+for (i in 1:length(files)) {
+  rsids <- read.csv(files[i])
+  rsids <- sapply(rsids$name, as.character)
+  writeClipboard(rsids)
+  
+  rsid2annot(rsids,filenames[i])
 }
